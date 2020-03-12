@@ -1,9 +1,10 @@
 const express = require("express");
+const PublicationController = require("./controllers/PublicationController");
 
 const routes = express.Router();
 
-routes.get("/", (req, res) => {
-  res.send("Hello world");
-});
+routes.get("/publication", PublicationController.index);
+routes.post("/publication", PublicationController.store);
+routes.delete("/publication/:id", PublicationController.delete);
 
 module.exports = routes;

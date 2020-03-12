@@ -21,6 +21,10 @@ const Publication = new mongoose.Schema(
     category: {
       type: String,
       required: true
+    },
+    deleted_at: {
+      type: Date,
+      required: false
     }
   },
   { timestamps: true }
