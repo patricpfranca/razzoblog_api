@@ -32,7 +32,7 @@ class PublicationController {
 
   async delete(req, res) {
     try {
-      const publication = await Publication.findAndModify(
+      const publication = await Publication.findByIdAndUpdate(
         {
           _id: req.params.id
         },
@@ -40,6 +40,20 @@ class PublicationController {
       );
 
       return res.status(200).json();
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const publication = await Publication.findByIdAndUpdate(
+        { _id: req.params.id },
+        req.body,
+        { new: true }
+      );
+
+      return res.status(200).json(publication);
     } catch (error) {
       return res.status(400).json(error);
     }
