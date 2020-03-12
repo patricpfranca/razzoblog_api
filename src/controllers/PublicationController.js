@@ -21,8 +21,16 @@ class PublicationController {
   }
 
   async index(req, res) {
+    let query = { deleted_at: null };
+
+    if (req.query) {
+      for (const key in req.query) {
+        query = { [key]: new RegExp(req.query[key], "i") };
+      }
+    }
+
     try {
-      const publications = await Publication.find({ deleted_at: null });
+      const publications = await Publication.find(query);
 
       return res.status(200).json(publications);
     } catch (error) {
