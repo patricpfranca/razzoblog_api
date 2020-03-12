@@ -1,0 +1,27 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo:4
+    environment:
+      - MONGO_INITDB_DATABASE=razzo_blog
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - "27017:27017"
+    networks:
+      - mongonet
+
+  mongoclient:
+    image: mongoclient/mongoclient
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      STARTUP_DELAY: 10
+      MONGO_URL: "mongodb://localhost:27017/razzo_blog"
+    networks:
+      - mongonet
+
+networks:
+  mongonet:
