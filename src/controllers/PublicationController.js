@@ -66,6 +66,18 @@ class PublicationController {
       return res.status(400).json(error);
     }
   }
+
+  async category(req, res) {
+    try {
+      const category = await Publication.find({ deleted_at: null }).distinct(
+        "category"
+      );
+
+      return res.status(200).json(category);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  }
 }
 
 module.exports = new PublicationController();

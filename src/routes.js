@@ -7,5 +7,6 @@ routes.get("/publication", PublicationController.index);
 routes.post("/publication", PublicationController.store);
 routes.delete("/publication/:id", PublicationController.delete);
 routes.put("/publication/:id", PublicationController.update);
+routes.get("/categories", PublicationController.category);
 
 module.exports = routes;
